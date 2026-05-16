@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Glow & Health – Nhật Ký Đường Huyết ✨</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -22,229 +22,175 @@
       --charcoal:    #5A6B7A;
       --bg-cream:    #F5F8FF;
       --white:       #FFFFFF;
-      --shadow-sm:   0 2px 12px rgba(15,133,255,0.06);
-      --shadow-md:   0 8px 32px rgba(15,133,255,0.12);
-      --radius:      20px;
+      --shadow-sm:   0 2px 12px rgba(15,133,255,0.08);
+      --shadow-md:   0 6px 28px rgba(15,133,255,0.13);
+      --radius:      16px;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Aptos Display', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
       background: var(--bg-cream);
       color: var(--charcoal);
       min-height: 100vh;
-      overflow-x: hidden;
     }
-
-    /* KHẮC PHỤC LỖI LỆCH TRÁI - CĂN GIỮA TRANG */
-    .container-centered {
-      max-width: 1240px;
-      margin-left: auto;
-      margin-right: auto;
-      width: 100%;
+    .header-wrap {
+      background: linear-gradient(135deg, #0F85FF 0%, #38b6ff 55%, #78C1FF 100%);
+      padding: 28px 36px 24px;
+      position: relative;
+      overflow: hidden;
     }
-
-    /* ===== STYLE CHUẨN GLASSMORPHISM ===== */
-    .glass-badge {
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      box-shadow: 0 4px 12px rgba(15, 133, 255, 0.08);
-      text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    .header-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
     }
-    
-    .glass-icon-wrap {
-      background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      box-shadow: inset 0 1px 2px rgba(255,255,255,0.8), 0 4px 10px rgba(90,107,122,0.08);
-      display: flex; align-items: center; justify-content: center;
-      width: 36px; height: 36px; border-radius: 12px; flex-shrink: 0;
+    .header-quote {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.85);
+      font-style: italic;
+      margin-top: 6px;
     }
-
-    /* GLASSMORPHISM ICON KIỂU MỚI CHO TIÊU ĐỀ VÀ TRẠNG THÁI */
-    .glass-icon-inline {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(15, 133, 255, 0.05);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(15, 133, 255, 0.15);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6), 0 2px 6px rgba(15, 133, 255, 0.04);
-      width: 30px;
-      height: 30px;
-      border-radius: 9px;
-      font-size: 0.95rem;
-      flex-shrink: 0;
+    .header-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 999px;
+      padding: 4px 14px;
+      font-size: 0.78rem;
+      color: #fff;
     }
-
-    /* NÂNG CẤP THIẾT KẾ KHỐI CƠ BẢN */
     .card {
       background: var(--white);
       border-radius: var(--radius);
       box-shadow: var(--shadow-sm);
-      padding: 18px;
-      border: 1px solid rgba(15, 133, 255, 0.04);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 20px 22px;
+      transition: box-shadow 0.2s;
     }
-    .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-    
+    .card:hover { box-shadow: var(--shadow-md); }
     .card-title {
-      font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.06em; color: var(--blue-tech); margin-bottom: 16px;
-      display: flex; align-items: center; gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--blue-tech);
+      margin-bottom: 12px;
     }
-
     .kpi-card {
-      background: var(--white); border-radius: var(--radius); padding: 20px;
-      box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
-      border: 1px solid rgba(15, 133, 255, 0.04);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
     .kpi-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
     .kpi-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
       background: linear-gradient(90deg, var(--blue-tech), var(--blue-pastel));
     }
-    .kpi-label { font-size: 0.78rem; font-weight: 600; color: #9DB0BF; text-transform: uppercase; letter-spacing: 0.04em; }
+    .kpi-label { font-size: 0.75rem; font-weight: 600; color: #9DB0BF; text-transform: uppercase; }
     .kpi-value { font-size: 2rem; font-weight: 800; color: var(--blue-tech); line-height: 1.1; margin: 6px 0 2px; }
     .kpi-sub { font-size: 0.78rem; color: #9DB0BF; }
-
-    /* TRẠNG THÁI ĐƯỜNG HUYẾT ĐƯỢC TỐI ƯU SANG LỚP PHỦ GLASS */
-    .status-badge {
-      display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px;
-      border-radius: 999px; font-size: 0.75rem; font-weight: 700;
-      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-    }
-    .badge-normal  { background: rgba(29, 164, 98, 0.12); color: #1DA462; border: 1px solid rgba(29, 164, 98, 0.3); }
-    .badge-warn    { background: rgba(229, 146, 10, 0.12); color: #E5920A; border: 1px solid rgba(229, 146, 10, 0.3); }
-    .badge-danger  { background: rgba(229, 76, 76, 0.12); color: #E54C4C; border: 1px solid rgba(229, 76, 76, 0.3); }
-    .badge-low     { background: rgba(108, 77, 239, 0.12); color: #6C4DEF; border: 1px solid rgba(108, 77, 239, 0.3); }
-
-    /* KHẮC PHỤC BẢNG TRÊN MOBILE */
-    .table-scroll-container {
-      width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;
-      border-radius: 12px; border: 1px solid #EDF3F8;
-    }
-    .history-table { width: 100%; min-width: 650px; border-collapse: collapse; font-size: 0.85rem; }
+    .glucose-badge { display: inline-block; padding: 3px 12px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+    .badge-normal  { background: #E8FBF4; color: #1DA462; }
+    .badge-warn    { background: #FFF4E0; color: #E5920A; }
+    .badge-danger  { background: #FFE9EA; color: #E54C4C; }
+    .badge-low     { background: #EDE9FF; color: #6C4DEF; }
+    .chart-wrap { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 20px 22px; }
+    .chart-container { position: relative; height: 270px; }
+    .history-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
     .history-table thead th {
       background: linear-gradient(135deg, #EEF6FF, #E6F8FC);
-      color: var(--blue-tech); font-weight: 700; font-size: 0.75rem;
-      text-transform: uppercase; padding: 12px 14px; text-align: left;
+      color: var(--blue-tech); font-weight: 700; font-size: 0.73rem;
+      text-transform: uppercase; padding: 10px 12px; text-align: left; border-bottom: 2px solid #D8EFFE;
     }
     .history-table tbody tr { border-bottom: 1px solid #EDF3F8; transition: background 0.15s; }
     .history-table tbody tr:hover { background: #F4FAFF; }
-    .history-table td { padding: 12px 14px; vertical-align: middle; }
-
-    .latest-value {
-      font-size: 3.5rem; font-weight: 800; line-height: 1;
-      background: linear-gradient(135deg, var(--blue-tech), #38b6ff);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .latest-note-box {
-      background: linear-gradient(135deg, #F0F9FF, #E8FEF7);
-      border-left: 4px solid var(--blue-pastel); border-radius: 8px;
-      padding: 12px 16px; margin-top: 14px; font-size: 0.83rem; line-height: 1.6;
-    }
-
-    .chart-container { position: relative; height: 280px; width: 100%; }
-    @media (max-width: 640px) { .chart-container { height: 320px; } }
-
-    .main-grid { display: grid; grid-template-columns: 320px 1fr; gap: 24px; }
-    @media (max-width: 950px) { .main-grid { grid-template-columns: 1fr; } }
-    .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    @media (max-width: 640px) { .kpi-grid { grid-template-columns: 1fr; } }
-
-    .loading-spinner { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 60px 20px; }
-    .spinner { width: 44px; height: 44px; border: 4px solid #D8EFFE; border-top-color: var(--blue-tech); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    .history-table td { padding: 9px 12px; vertical-align: top; }
+    .tip-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px dashed #E4EEF8; }
+    .tip-text { font-size: 0.82rem; line-height: 1.5; color: var(--charcoal); }
+    .latest-value { font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, var(--blue-tech), #38b6ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .latest-note-box { background: linear-gradient(135deg, #F0F9FF, #E8FEF7); border-left: 3px solid var(--blue-pastel); padding: 10px 14px; margin-top: 12px; font-size: 0.82rem; }
+    .loading-spinner { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 40px; }
+    .spinner { width: 40px; height: 40px; border: 3px solid #D8EFFE; border-top-color: var(--blue-tech); border-radius: 50%; animation: spin 0.8s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
+    .fade-up { animation: fadeUp 0.45s ease both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    .main-grid { display: grid; grid-template-columns: 300px 1fr; gap: 20px; }
+    @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
+    .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    @media (max-width: 640px) { .kpi-grid { grid-template-columns: 1fr 1fr; } }
   </style>
 </head>
 <body>
 
-<div class="container-centered px-4 py-4 sm:py-6 md:py-8">
-
-  <div class="w-full bg-gradient-to-br from-[#0F85FF] via-[#38b6ff] to-[#78C1FF] rounded-none p-6 sm:p-8 md:p-10 relative overflow-hidden shadow-md mb-6">
-    <div class="absolute -top-12 -right-12 w-48 h-48 bg-white/10 rounded-full blur-xl"></div>
-    <div class="absolute -bottom-16 left-1/4 w-36 h-36 bg-white/5 rounded-full blur-lg"></div>
-    
-    <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-      <div class="space-y-2">
-        <h1 class="text-white text-2xl sm:text-3xl font-extrabold tracking-tight drop-shadow-sm">Glow &amp; Health: Nhật Ký Đường Huyết ✨</h1>
-        <p class="text-white/90 text-sm italic font-medium" id="dailyQuote">Đang tải câu khích lệ...</p>
-      </div>
-      <div class="flex flex-wrap items-center gap-3">
-        <span class="glass-badge flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold text-white">
-          <span class="inline-flex items-center justify-center bg-white/20 backdrop-blur-md border border-white/30 w-6 h-6 rounded-md text-xs shadow-inner">💊</span> Theo dõi sức khoẻ
-        </span>
-        <button onclick="loadData()" class="glass-badge flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-white hover:bg-white/30 active:scale-95 transition-all cursor-pointer" id="lastUpdated">
-          🔄 Tải dữ liệu
-        </button>
-      </div>
+<div class="header-wrap">
+  <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+    <div>
+      <div class="header-title">Glow &amp; Health: Nhật Ký Đường Huyết ✨</div>
+      <div class="header-quote" id="dailyQuote">Đang tải câu khích lệ...</div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <span class="header-badge">💊 Theo dõi sức khoẻ</span>
+      <button onclick="loadData()" class="header-badge bg-white/20 hover:bg-white/40 cursor-pointer transition-all" id="lastUpdated">🔄 Tải dữ liệu</button>
     </div>
   </div>
+</div>
 
-  <div id="loadingState" class="loading-spinner card">
+<div style="max-width:1200px;margin:0 auto;padding:24px 16px 40px;">
+  <div id="loadingState" class="loading-spinner">
     <div class="spinner"></div>
-    <span class="text-sm font-medium text-slate-400">Đang đồng bộ dữ liệu trực tiếp...</span>
+    <span style="color:#9DB0BF;font-size:0.85rem;">Đang kết nối dữ liệu động...</span>
   </div>
 
-  <div id="errorState" style="display:none;" class="card text-center py-12 px-6">
-    <div class="w-16 h-16 mx-auto bg-red-500/10 backdrop-blur-md border border-red-500/30 text-2xl rounded-2xl flex items-center justify-center mb-4 shadow-sm">⚠️</div>
-    <h2 class="text-lg font-bold text-[#E54C4C] mb-2">Hệ Thống Phân Tích Dữ Liệu</h2>
-    <p class="text-sm text-slate-400 mb-4">Kết nối thành công tới máy chủ nhưng định dạng tệp trả về không đúng cấu trúc CSV.</p>
-    <div id="errorMsg" class="bg-slate-50 p-4 rounded-xl text-left text-xs font-mono text-slate-600 max-w-2xl mx-auto border border-slate-200 whitespace-pre-line overflow-x-auto"></div>
+  <div id="errorState" style="display:none;" class="card text-center py-10">
+    <div style="font-size:2rem;margin-bottom:12px;">⚠️</div>
+    <div style="font-size:1.1rem;font-weight:700;color:#E54C4C;margin-bottom:8px;">Hệ Thống Phân Tích Dữ Liệu</div>
+    <p class="text-sm text-gray-500 mb-2">Ứng dụng đã nhận được phản hồi từ kết nối nhưng cấu trúc không khớp với bảng dữ liệu CSV.</p>
+    <div id="errorMsg" class="bg-gray-50 p-4 rounded-lg text-left text-sm font-mono text-gray-600 max-w-2xl mx-auto border border-gray-200 whitespace-pre-line my-4 overflow-x-auto"></div>
+    <div class="text-xs text-gray-400 mt-4">Mẹo: Nếu nội dung trên là mã lỗi mạng, hãy đưa file lên GitHub Pages như hướng dẫn trước để khắc phục hoàn toàn.</div>
   </div>
 
-  <div id="dashboard" style="display:none;" class="w-full">
+  <div id="dashboard" style="display:none;">
     <div class="main-grid">
-      
-      <div class="space-y-6">
-        <div class="card">
-          <h3 class="card-title"><span class="glass-icon-inline">💡</span> Lời khuyên hôm nay</h3>
-          <div class="space-y-4">
-            <div class="flex items-start gap-3">
-              <div class="glass-icon-wrap">🥗</div>
-              <p class="text-xs sm:text-sm leading-relaxed"><strong>Ăn nhiều rau xanh:</strong> Chất xơ giúp kiểm soát tốc độ tăng đường, làm chậm lão hóa da.</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <div class="glass-icon-wrap">🚶‍♀️</div>
-              <p class="text-xs sm:text-sm leading-relaxed"><strong>Đi bộ 15 phút:</strong> Vận động nhẹ sau ăn 2h giúp cơ bắp tiêu thụ bớt lượng glucose dư thừa.</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <div class="glass-icon-wrap">💧</div>
-              <p class="text-xs sm:text-sm leading-relaxed"><strong>Uống đủ nước:</strong> Đảm bảo 2L nước mỗi ngày hỗ trợ chu trình thanh lọc tự nhiên tại thận.</p>
-            </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="card fade-up">
+          <div class="card-title">💡 Lời khuyên hôm nay</div>
+          <div id="tipsList">
+            <div class="tip-item"><div class="tip-text">🥗 <strong>Ăn nhiều rau xanh:</strong> Chất xơ giúp ổn định đường huyết, da sáng mịn hơn.</div></div>
+            <div class="tip-item"><div class="tip-text">🚶‍♀️ <strong>Đi bộ 15 phút:</strong> Giúp hấp thụ glucose tốt sau ăn, tránh tăng đột biến.</div></div>
+            <div class="tip-item"><div class="tip-text">💧 <strong>Uống đủ nước:</strong> Giúp thận đào thải tốt glucose dư thừa.</div></div>
           </div>
         </div>
 
-        <div class="card text-center py-6">
-          <h3 class="card-title justify-center"><span class="glass-icon-inline">🩸</span> Lần đo mới nhất</h3>
-          <div class="space-y-2 my-4">
-            <div class="latest-value tracking-tight" id="latestGlucose">--</div>
-            <div class="text-xs font-bold text-slate-400 tracking-wider uppercase">mmol/L</div>
+        <div class="card fade-up" id="latestCard">
+          <div class="card-title">🩸 Lần đo mới nhất</div>
+          <div style="text-align:center;padding:8px 0;">
+            <div class="latest-value" id="latestGlucose">--</div>
+            <div class="latest-unit">mmol/L</div>
+            <div style="margin-top:8px;" id="latestBadge"></div>
+            <div style="margin-top:6px;font-size:0.78rem;color:#9DB0BF;" id="latestDateTime"></div>
+            <div style="margin-top:4px;font-size:0.78rem;color:#9DB0BF;" id="latestType"></div>
           </div>
-          <div id="latestBadge" class="my-3"></div>
-          <div class="text-xs font-semibold text-slate-400 space-y-1 mt-2">
-            <div id="latestDateTime" class="flex flex-wrap items-center justify-center gap-1"></div>
-            <div id="latestType" class="text-[#0F85FF] flex items-center justify-center mt-1"></div>
-          </div>
-          <div class="latest-note-box text-left" id="latestNote">📝 Ghi chú...</div>
+          <div class="latest-note-box" id="latestNote">📝 Ghi chú...</div>
         </div>
       </div>
 
-      <div class="space-y-6">
-        <div class="kpi-grid">
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="kpi-grid fade-up">
           <div class="kpi-card">
-            <div class="kpi-label">Đường Huyết TB</div>
+            <div class="kpi-label">Đường Huyết Trung Bình</div>
             <div class="kpi-value" id="kpiAvg">--</div>
             <div class="kpi-sub">mmol/L</div>
           </div>
           <div class="kpi-card">
             <div class="kpi-label">Lần đo gần nhất</div>
-            <div class="kpi-value" id="kpiLast" style="font-size:1.4rem;">--</div>
+            <div class="kpi-value" id="kpiLast" style="font-size:1.35rem;">--</div>
             <div class="kpi-sub" id="kpiLastDate">--</div>
           </div>
           <div class="kpi-card">
@@ -254,42 +200,37 @@
           </div>
         </div>
 
-        <div class="card">
-          <div class="mb-4">
-            <h3 class="card-title"><span class="glass-icon-inline">📈</span> Xu Hướng Đường Huyết Chi Tiết</h3>
-            <p class="text-xs text-slate-400 mt-0.5">Dữ liệu phân tích trực quan hóa chuỗi hành vi sức khỏe</p>
+        <div class="chart-wrap fade-up">
+          <div class="flex justify-between items-center mb-4">
+            <div>
+              <div class="card-title" style="margin-bottom:2px;">📈 Xu Hướng Đường Huyết</div>
+            </div>
           </div>
           <div class="chart-container">
             <canvas id="glucoseChart"></canvas>
           </div>
         </div>
 
-        <div class="card">
-          <h3 class="card-title"><span class="glass-icon-inline">🗓️</span> Nhật Ký 5 Lần Đo Gần Nhất</h3>
-          <div class="table-scroll-container">
+        <div class="card fade-up">
+          <div class="card-title" style="margin-bottom:14px;">🗓️ 5 Lần Đo Gần Nhất</div>
+          <div style="overflow-x:auto;">
             <table class="history-table">
               <thead>
                 <tr>
                   <th>Ngày</th>
                   <th>Giờ</th>
-                  <th>Chỉ số</th>
-                  <th>Phân loại</th>
-                  <th>Nhật ký sinh hoạt <span class="glass-icon-inline w-5 h-5 text-[10px] bg-sky-500/10 border-sky-500/20">📝</span></th>
+                  <th>Đường Huyết</th>
+                  <th>Trạng thái</th>
+                  <th>Ghi chú 📝</th>
                 </tr>
               </thead>
               <tbody id="historyBody"></tbody>
             </table>
           </div>
-          <p class="text-[11px] text-slate-400 italic mt-3 sm:hidden">👉 Mẹo: Bạn có thể vuốt bảng sang phải để đọc toàn bộ cột ghi chú ăn uống.</p>
         </div>
       </div>
-
     </div>
   </div>
-
-  <footer class="text-center mt-10 text-xs font-medium text-slate-400 tracking-wide">
-    Glow &amp; Health Dashboard · Kiến tạo phong cách sống lành mạnh kết hợp Vibe Coding 💙
-  </footer>
 </div>
 
 <script>
@@ -300,9 +241,9 @@ const THRESHOLD_WARN  = 6.1;
 const THRESHOLD_LOW   = 3.9;   
 
 const quotes = [
-  "\"Mỗi lần theo dõi chỉ số là một hành động yêu thương bản thân đúng nghĩa.\" ✨",
-  "\"Đường huyết cân bằng mang lại làn da sáng, năng lượng tràn đầy tâm trí.\" 💪",
-  "\"Mỗi bữa ăn lành mạnh hôm nay quyết định thần thái rạng ngời ngày mai.\" 💌"
+  "\"Mỗi lần đo là một bước nhỏ trên con đường glow-up sức khỏe của bạn.\" ✨",
+  "\"Đường huyết ổn định = da đẹp + năng lượng dồi dào + tâm trạng vui vẻ.\" 💪",
+  "\"Mỗi bữa ăn lành mạnh là một lá thư tình bạn gửi cho tương lai của mình.\" 💌"
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -317,6 +258,7 @@ async function loadData() {
 
   let logs = [];
 
+  // 1. THỬ NGHIỆM FETCH TRỰC TIẾP
   try {
     const res = await fetch(SHEET_CSV_URL);
     if (res.ok) { 
@@ -325,10 +267,11 @@ async function loadData() {
         parseCsvText(text); 
         return; 
       }
-      logs.push(`Direct Fetch: Phản hồi quá ngắn hoặc không đúng cấu trúc bảng.`);
-    } else { logs.push(`Direct Fetch: Lỗi phản hồi HTTP ${res.status}`); }
-  } catch(e) { logs.push(`Direct Fetch: Rào cản mạng CORS (${e.message})`); }
+      logs.push(`Direct Fetch: Nhận về chuỗi quá ngắn hoặc định dạng HTML không phải CSV.`);
+    } else { logs.push(`Direct Fetch: Lỗi HTTP ${res.status}`); }
+  } catch(e) { logs.push(`Direct Fetch: Bị chặn CORS (${e.message})`); }
 
+  // 2. THỬ NGHIỆM QUA PROXY CORSPROXY.IO
   try {
     const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(SHEET_CSV_URL)}`);
     if (res.ok) { 
@@ -337,10 +280,11 @@ async function loadData() {
         parseCsvText(text); 
         return; 
       }
-      logs.push(`CorsProxy: Trả về tệp lỗi hệ thống.`);
-    } else { logs.push(`CorsProxy: Lỗi phản hồi HTTP ${res.status}`); }
-  } catch(e) { logs.push(`CorsProxy: Trục trặc cổng kết nối (${e.message})`); }
+      logs.push(`CorsProxy: Nhận được thông báo hệ thống thay vì dữ liệu CSV.`);
+    } else { logs.push(`CorsProxy: Lỗi HTTP ${res.status}`); }
+  } catch(e) { logs.push(`CorsProxy: Thất bại (${e.message})`); }
 
+  // 3. THỬ NGHIỆM QUA PROXY ALLORIGINS
   try {
     const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(SHEET_CSV_URL)}`);
     if (res.ok) { 
@@ -349,27 +293,29 @@ async function loadData() {
         parseCsvText(json.contents); 
         return; 
       }
-      logs.push(`AllOrigins: Chuỗi dữ liệu thô bị gãy cấu trúc.`);
-    } else { logs.push(`AllOrigins: Lỗi tín hiệu mạng`); }
+      logs.push(`AllOrigins: Nội dung trả về không đúng cấu trúc bảng.`);
+    } else { logs.push(`AllOrigins: Lỗi kết nối`); }
   } catch(e) { logs.push(`AllOrigins: Thất bại (${e.message})`); }
 
-  showError(`Hệ thống bảo mật trình duyệt hoặc Proxy tạm thời chặn quyền truy xuất tệp.\n\n[Chi tiết kỹ thuật]:\n${logs.join('\n')}`);
+  // NẾU TẤT CẢ THẤT BẠI: Hiển thị nhật ký log để chẩn đoán trực quan
+  showError(`Ứng dụng không nhận được dữ liệu CSV chuẩn từ các nguồn kết nối công khai.\n\n[Nhật ký hệ thống]:\n${logs.join('\n')}\n\n*Gợi ý: Hãy tiến hành đưa file index.html này lên GitHub Pages như hướng dẫn ở bước trước. Khi chạy trên môi trường internet thật (https://), trình duyệt sẽ kích hoạt chế độ tải trực tiếp an toàn từ Google Sheet mà không cần đi qua proxy trung gian nữa!`);
 }
 
 function parseCsvText(csvText) {
   try {
+    // Để trống cấu trúc delimiter để PapaParse tự động quét nhận diện thông minh (, hoặc ;)
     const result = Papa.parse(csvText.trim(), {
       header: true,
       skipEmptyLines: true
     });
 
     if (!result.data || result.data.length === 0) {
-      showError(`[Lỗi Phân Tích Cột]: Bảng tính trống hoặc cấu trúc không khớp.\n\nDữ liệu nhận diện:\n"${csvText.substring(0, 250)}..."`);
+      showError(`[Lỗi PapaParse]: Không thể phân tích cấu trúc cột.\n\nNội dung thô nhận được từ Server (200 ký tự đầu):\n"${csvText.substring(0, 200)}..."`);
       return;
     }
     processAndRender(result.data);
   } catch (err) {
-    showError(`Lỗi cú pháp phân tích bảng: ${err.message}`);
+    showError(`Lỗi phân tích cú pháp CSV: ${err.message}`);
   }
 }
 
@@ -401,13 +347,13 @@ function processAndRender(rawData) {
     });
 
     if (rows.length === 0) {
-      showError("Đã đọc được bảng tính nhưng cột dữ liệu chỉ số Glucose không hợp lệ.");
+      showError("Đã nhận dạng cấu trúc bảng nhưng các hàng dữ liệu không chứa chỉ số Glucose hợp lệ.");
       return;
     }
 
     renderDashboard(rows);
   } catch(err) {
-    showError(`Lỗi xử lý mảng biểu đồ: ${err.message}`);
+    showError(`Lỗi xử lý dữ liệu biểu đồ: ${err.message}`);
   }
 }
 
@@ -423,27 +369,13 @@ function renderDashboard(rows) {
   document.getElementById('kpiLastDate').textContent = last.dateStr + ' ' + (last.timeStr || '').substring(0,5);
 
   const now = new Date();
-  // ĐÃ SỬA: Chuyển đổi icon nút tải dữ liệu sang Glassmorphism đồng bộ khi render lại
-  document.getElementById('lastUpdated').innerHTML = `<span class="inline-flex items-center justify-center bg-white/20 backdrop-blur-md border border-white/30 w-5 h-5 rounded-md text-[10px] mr-1">🔄</span> Tải lại: ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
+  document.getElementById('lastUpdated').textContent = `🔄 Cập nhật: ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
 
   document.getElementById('latestGlucose').textContent = last.glucoseValue.toFixed(1);
-  
-  // ĐÃ SỬA: Chuyển các icon thời gian 📅 ⏰ sang cấu trúc Glassmorphism
-  document.getElementById('latestDateTime').innerHTML = `
-    <span class="glass-icon-inline w-6 h-6 text-xs mr-0.5">📅</span> ${last.dateStr || '--'} 
-    <span class="glass-icon-inline w-6 h-6 text-xs ml-2 mr-0.5">⏰</span> ${(last.timeStr||'').substring(0,5)}
-  `;
-  
-  // ĐÃ SỬA: Chuyển icon nhãn phân loại 🏷️ sang Glassmorphism
-  document.getElementById('latestType').innerHTML = last.type ? `<span class="glass-icon-inline w-6 h-6 text-xs mr-1.5">🏷️</span> Lớp đo: ${last.type}` : '';
+  document.getElementById('latestDateTime').textContent = `📅 ${last.dateStr || '--'} ⏰ ${(last.timeStr||'').substring(0,5)}`;
+  document.getElementById('latestType').textContent = last.type ? `🏷️ ${last.type}` : '';
   document.getElementById('latestBadge').innerHTML = glucoseBadge(last.glucoseValue);
-  
-  // ĐÃ SỬA: Chuyển đổi icon ghi chú sinh hoạt 📝 sang Glassmorphism dạng khối flex lùi lề
-  document.getElementById('latestNote').innerHTML = last.note ? `
-    <div class="flex items-start gap-2">
-      <span class="glass-icon-inline w-6 h-6 text-xs mt-0.5">📝</span>
-      <span class="pt-0.5">${escHtml(last.note)}</span>
-    </div>` : '<span class="text-slate-300 italic">Không có ghi chú sinh hoạt.</span>';
+  document.getElementById('latestNote').innerHTML = last.note ? `📝 ${escHtml(last.note)}` : '<i>Không có ghi chú.</i>';
 
   renderChart(chartRows);
 
@@ -453,11 +385,11 @@ function renderDashboard(rows) {
   recent.forEach(r => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td class="font-medium text-slate-600">${escHtml(r.dateStr)}</td>
-      <td class="text-slate-400">${(r.timeStr||'').substring(0,5)}</td>
-      <td style="font-weight:800; color:${glucoseColor(r.glucoseValue)}; font-size:0.95rem;">${r.glucoseValue.toFixed(1)}</td>
-      <td>${glucoseBadge(r.glucoseValue)} ${r.type ? `<br><span class='text-slate-400 font-medium text-[11px] mt-1 inline-block bg-slate-100/70 px-2 py-0.5 rounded border border-slate-200/50'>${escHtml(r.type)}</span>` : ''}</td>
-      <td class="text-slate-600 font-medium style='max-width:280px; text-overflow:ellipsis;'">${r.note ? escHtml(r.note) : '—'}</td>
+      <td>${escHtml(r.dateStr)}</td>
+      <td>${(r.timeStr||'').substring(0,5)}</td>
+      <td style="font-weight:700; color:${glucoseColor(r.glucoseValue)};">${r.glucoseValue.toFixed(1)}</td>
+      <td>${glucoseBadge(r.glucoseValue)} ${r.type ? `<br><span class='text-gray-400 text-xs'>${escHtml(r.type)}</span>` : ''}</td>
+      <td style="max-width:250px;">${r.note ? escHtml(r.note) : '—'}</td>
     `;
     tbody.appendChild(tr);
   });
@@ -499,8 +431,7 @@ function renderChart(rows) {
       maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
-        y: { suggestedMin: 3.0, suggestedMax: 10.0, grid: { color: '#F0F4FA' } },
-        x: { grid: { display: false } }
+        y: { suggestedMin: 3.0, suggestedMax: 10.0 }
       }
     },
     plugins: [{
@@ -513,8 +444,8 @@ function renderChart(rows) {
         ctx.setLineDash([6, 4]);
         ctx.strokeStyle = '#E54C4C';
         ctx.beginPath(); ctx.moveTo(chartArea.left, yPos); ctx.lineTo(chartArea.right, yPos); ctx.stroke();
-        ctx.fillStyle = '#E54C4C'; ctx.font = 'bold 11px sans-serif';
-        ctx.fillText(`Ngưỡng cao: ${THRESHOLD_HIGH}`, chartArea.right - 95, yPos - 6);
+        ctx.fillStyle = '#E54C4C'; ctx.font = '11px sans-serif';
+        ctx.fillText(`Ngưỡng cao: ${THRESHOLD_HIGH}`, chartArea.right - 90, yPos - 5);
         ctx.restore();
       }
     }]
@@ -528,12 +459,11 @@ function glucoseColor(v) {
   return '#E54C4C';                           
 }
 
-// ĐÃ SỬA: Toàn bộ huy hiệu trạng thái (Thấp, Bình thường, Cao) được tối ưu cấu trúc Blur-Glassmorphism
 function glucoseBadge(v) {
-  if (v < THRESHOLD_LOW)  return `<span class="status-badge badge-low"><span class="w-2 h-2 rounded-full bg-[#6C4DEF] mr-1"></span> Thấp</span>`;
-  if (v < THRESHOLD_WARN) return `<span class="status-badge badge-normal"><span class="w-2 h-2 rounded-full bg-[#1DA462] mr-1"></span> Bình thường</span>`;
-  if (v < THRESHOLD_HIGH) return `<span class="status-badge badge-warn"><span class="w-2 h-2 rounded-full bg-[#E5920A] mr-1"></span> Hơi cao</span>`;
-  return `<span class="status-badge badge-danger"><span class="w-2 h-2 rounded-full bg-[#E54C4C] mr-1"></span> Cao</span>`;
+  if (v < THRESHOLD_LOW)  return `<span class="glucose-badge badge-low">🔵 Thấp</span>`;
+  if (v < THRESHOLD_WARN) return `<span class="glucose-badge badge-normal">✅ Bình thường</span>`;
+  if (v < THRESHOLD_HIGH) return `<span class="glucose-badge badge-warn">⚠️ Hơi cao</span>`;
+  return `<span class="glucose-badge badge-danger">🔴 Cao</span>`;
 }
 
 function escHtml(str) {
