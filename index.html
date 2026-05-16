@@ -35,7 +35,15 @@
       overflow-x: hidden;
     }
 
-    /* ===== STYLE CHUẨN GLASSMORPHISM 2026 ===== */
+    /* KHẮC PHỤC LỖI LỆCH TRÁI - CĂN GIỮA TRANG */
+    .container-centered {
+      max-width: 1240px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+    }
+
+    /* ===== STYLE CHUẨN GLASSMORPHISM ===== */
     .glass-badge {
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(12px);
@@ -55,7 +63,24 @@
       width: 36px; height: 36px; border-radius: 12px; flex-shrink: 0;
     }
 
-    /* ===== NÂNG CẤP THIẾT KẾ KHỐI CƠ BẢN ===== */
+    /* GLASSMORPHISM ICON KIỂU MỚI CHO TIÊU ĐỀ VÀ TRẠNG THÁI */
+    .glass-icon-inline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 133, 255, 0.05);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(15, 133, 255, 0.15);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6), 0 2px 6px rgba(15, 133, 255, 0.04);
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    /* NÂNG CẤP THIẾT KẾ KHỐI CƠ BẢN */
     .card {
       background: var(--white);
       border-radius: var(--radius);
@@ -87,17 +112,18 @@
     .kpi-value { font-size: 2rem; font-weight: 800; color: var(--blue-tech); line-height: 1.1; margin: 6px 0 2px; }
     .kpi-sub { font-size: 0.78rem; color: #9DB0BF; }
 
-    /* ===== TRẠNG THÁI ĐƯỜNG HUYẾT GLASS BADGE ===== */
+    /* TRẠNG THÁI ĐƯỜNG HUYẾT ĐƯỢC TỐI ƯU SANG LỚP PHỦ GLASS */
     .status-badge {
-      display: inline-flex; align-items: center; gap: 4px; padding: 4px 14px;
+      display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px;
       border-radius: 999px; font-size: 0.75rem; font-weight: 700;
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     }
-    .badge-normal  { background: rgba(29, 164, 98, 0.1); color: #1DA462; border: 1px solid rgba(29, 164, 98, 0.25); }
-    .badge-warn    { background: rgba(229, 146, 10, 0.1); color: #E5920A; border: 1px solid rgba(229, 146, 10, 0.25); }
-    .badge-danger  { background: rgba(229, 76, 76, 0.1); color: #E54C4C; border: 1px solid rgba(229, 76, 76, 0.25); }
-    .badge-low     { background: rgba(108, 77, 239, 0.1); color: #6C4DEF; border: 1px solid rgba(108, 77, 239, 0.25); }
+    .badge-normal  { background: rgba(29, 164, 98, 0.12); color: #1DA462; border: 1px solid rgba(29, 164, 98, 0.3); }
+    .badge-warn    { background: rgba(229, 146, 10, 0.12); color: #E5920A; border: 1px solid rgba(229, 146, 10, 0.3); }
+    .badge-danger  { background: rgba(229, 76, 76, 0.12); color: #E54C4C; border: 1px solid rgba(229, 76, 76, 0.3); }
+    .badge-low     { background: rgba(108, 77, 239, 0.12); color: #6C4DEF; border: 1px solid rgba(108, 77, 239, 0.3); }
 
-    /* ===== KHẮC PHỤC BẢNG TRÊN MOBILE ===== */
+    /* KHẮC PHỤC BẢNG TRÊN MOBILE */
     .table-scroll-container {
       width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;
       border-radius: 12px; border: 1px solid #EDF3F8;
@@ -138,9 +164,9 @@
 </head>
 <body>
 
-<div class="max-w-[1240px] mx-auto px-4 py-4 sm:py-6 md:py-8">
+<div class="container-centered px-4 py-4 sm:py-6 md:py-8">
 
-  <div class="w-full bg-gradient-to-br from-[#0F85FF] via-[#38b6ff] to-[#78C1FF] rounded-[24px] p-6 sm:p-8 md:p-10 relative overflow-hidden shadow-md mb-6">
+  <div class="w-full bg-gradient-to-br from-[#0F85FF] via-[#38b6ff] to-[#78C1FF] rounded-none p-6 sm:p-8 md:p-10 relative overflow-hidden shadow-md mb-6">
     <div class="absolute -top-12 -right-12 w-48 h-48 bg-white/10 rounded-full blur-xl"></div>
     <div class="absolute -bottom-16 left-1/4 w-36 h-36 bg-white/5 rounded-full blur-lg"></div>
     
@@ -151,7 +177,7 @@
       </div>
       <div class="flex flex-wrap items-center gap-3">
         <span class="glass-badge flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold text-white">
-          <span>💊</span> Theo dõi sức khoẻ
+          <span class="inline-flex items-center justify-center bg-white/20 backdrop-blur-md border border-white/30 w-6 h-6 rounded-md text-xs shadow-inner">💊</span> Theo dõi sức khoẻ
         </span>
         <button onclick="loadData()" class="glass-badge flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-white hover:bg-white/30 active:scale-95 transition-all cursor-pointer" id="lastUpdated">
           🔄 Tải dữ liệu
@@ -166,7 +192,7 @@
   </div>
 
   <div id="errorState" style="display:none;" class="card text-center py-12 px-6">
-    <div class="text-4xl mb-4">⚠️</div>
+    <div class="w-16 h-16 mx-auto bg-red-500/10 backdrop-blur-md border border-red-500/30 text-2xl rounded-2xl flex items-center justify-center mb-4 shadow-sm">⚠️</div>
     <h2 class="text-lg font-bold text-[#E54C4C] mb-2">Hệ Thống Phân Tích Dữ Liệu</h2>
     <p class="text-sm text-slate-400 mb-4">Kết nối thành công tới máy chủ nhưng định dạng tệp trả về không đúng cấu trúc CSV.</p>
     <div id="errorMsg" class="bg-slate-50 p-4 rounded-xl text-left text-xs font-mono text-slate-600 max-w-2xl mx-auto border border-slate-200 whitespace-pre-line overflow-x-auto"></div>
@@ -177,7 +203,7 @@
       
       <div class="space-y-6">
         <div class="card">
-          <h3 class="card-title">💡 Lời khuyên hôm nay</h3>
+          <h3 class="card-title"><span class="glass-icon-inline">💡</span> Lời khuyên hôm nay</h3>
           <div class="space-y-4">
             <div class="flex items-start gap-3">
               <div class="glass-icon-wrap">🥗</div>
@@ -195,15 +221,15 @@
         </div>
 
         <div class="card text-center py-6">
-          <h3 class="card-title justify-center">🩸 Lần đo mới nhất</h3>
+          <h3 class="card-title justify-center"><span class="glass-icon-inline">🩸</span> Lần đo mới nhất</h3>
           <div class="space-y-2 my-4">
             <div class="latest-value tracking-tight" id="latestGlucose">--</div>
             <div class="text-xs font-bold text-slate-400 tracking-wider uppercase">mmol/L</div>
           </div>
           <div id="latestBadge" class="my-3"></div>
           <div class="text-xs font-semibold text-slate-400 space-y-1 mt-2">
-            <div id="latestDateTime"></div>
-            <div id="latestType" class="text-[#0F85FF]"></div>
+            <div id="latestDateTime" class="flex flex-wrap items-center justify-center gap-1"></div>
+            <div id="latestType" class="text-[#0F85FF] flex items-center justify-center mt-1"></div>
           </div>
           <div class="latest-note-box text-left" id="latestNote">📝 Ghi chú...</div>
         </div>
@@ -230,7 +256,7 @@
 
         <div class="card">
           <div class="mb-4">
-            <h3 class="card-title">📈 Xu Hướng Đường Huyết Chi Tiết</h3>
+            <h3 class="card-title"><span class="glass-icon-inline">📈</span> Xu Hướng Đường Huyết Chi Tiết</h3>
             <p class="text-xs text-slate-400 mt-0.5">Dữ liệu phân tích trực quan hóa chuỗi hành vi sức khỏe</p>
           </div>
           <div class="chart-container">
@@ -239,7 +265,7 @@
         </div>
 
         <div class="card">
-          <h3 class="card-title">🗓️ Nhật Ký 5 Lần Đo Gần Nhất</h3>
+          <h3 class="card-title"><span class="glass-icon-inline">🗓️</span> Nhật Ký 5 Lần Đo Gần Nhất</h3>
           <div class="table-scroll-container">
             <table class="history-table">
               <thead>
@@ -248,7 +274,7 @@
                   <th>Giờ</th>
                   <th>Chỉ số</th>
                   <th>Phân loại</th>
-                  <th>Nhật ký sinh hoạt 📝</th>
+                  <th>Nhật ký sinh hoạt <span class="glass-icon-inline w-5 h-5 text-[10px] bg-sky-500/10 border-sky-500/20">📝</span></th>
                 </tr>
               </thead>
               <tbody id="historyBody"></tbody>
@@ -397,13 +423,27 @@ function renderDashboard(rows) {
   document.getElementById('kpiLastDate').textContent = last.dateStr + ' ' + (last.timeStr || '').substring(0,5);
 
   const now = new Date();
-  document.getElementById('lastUpdated').textContent = `🔄 Tải lại: ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
+  // ĐÃ SỬA: Chuyển đổi icon nút tải dữ liệu sang Glassmorphism đồng bộ khi render lại
+  document.getElementById('lastUpdated').innerHTML = `<span class="inline-flex items-center justify-center bg-white/20 backdrop-blur-md border border-white/30 w-5 h-5 rounded-md text-[10px] mr-1">🔄</span> Tải lại: ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
 
   document.getElementById('latestGlucose').textContent = last.glucoseValue.toFixed(1);
-  document.getElementById('latestDateTime').textContent = `📅 ${last.dateStr || '--'} ⏰ ${(last.timeStr||'').substring(0,5)}`;
-  document.getElementById('latestType').textContent = last.type ? `🏷️ ${last.type}` : '';
+  
+  // ĐÃ SỬA: Chuyển các icon thời gian 📅 ⏰ sang cấu trúc Glassmorphism
+  document.getElementById('latestDateTime').innerHTML = `
+    <span class="glass-icon-inline w-6 h-6 text-xs mr-0.5">📅</span> ${last.dateStr || '--'} 
+    <span class="glass-icon-inline w-6 h-6 text-xs ml-2 mr-0.5">⏰</span> ${(last.timeStr||'').substring(0,5)}
+  `;
+  
+  // ĐÃ SỬA: Chuyển icon nhãn phân loại 🏷️ sang Glassmorphism
+  document.getElementById('latestType').innerHTML = last.type ? `<span class="glass-icon-inline w-6 h-6 text-xs mr-1.5">🏷️</span> Lớp đo: ${last.type}` : '';
   document.getElementById('latestBadge').innerHTML = glucoseBadge(last.glucoseValue);
-  document.getElementById('latestNote').innerHTML = last.note ? `📝 ${escHtml(last.note)}` : '<span class="text-slate-300 italic">Không có ghi chú sinh hoạt.</span>';
+  
+  // ĐÃ SỬA: Chuyển đổi icon ghi chú sinh hoạt 📝 sang Glassmorphism dạng khối flex lùi lề
+  document.getElementById('latestNote').innerHTML = last.note ? `
+    <div class="flex items-start gap-2">
+      <span class="glass-icon-inline w-6 h-6 text-xs mt-0.5">📝</span>
+      <span class="pt-0.5">${escHtml(last.note)}</span>
+    </div>` : '<span class="text-slate-300 italic">Không có ghi chú sinh hoạt.</span>';
 
   renderChart(chartRows);
 
@@ -416,7 +456,7 @@ function renderDashboard(rows) {
       <td class="font-medium text-slate-600">${escHtml(r.dateStr)}</td>
       <td class="text-slate-400">${(r.timeStr||'').substring(0,5)}</td>
       <td style="font-weight:800; color:${glucoseColor(r.glucoseValue)}; font-size:0.95rem;">${r.glucoseValue.toFixed(1)}</td>
-      <td>${glucoseBadge(r.glucoseValue)} ${r.type ? `<br><span class='text-slate-400 font-medium text-[11px] mt-0.5 inline-block'>${escHtml(r.type)}</span>` : ''}</td>
+      <td>${glucoseBadge(r.glucoseValue)} ${r.type ? `<br><span class='text-slate-400 font-medium text-[11px] mt-1 inline-block bg-slate-100/70 px-2 py-0.5 rounded border border-slate-200/50'>${escHtml(r.type)}</span>` : ''}</td>
       <td class="text-slate-600 font-medium style='max-width:280px; text-overflow:ellipsis;'">${r.note ? escHtml(r.note) : '—'}</td>
     `;
     tbody.appendChild(tr);
@@ -488,11 +528,12 @@ function glucoseColor(v) {
   return '#E54C4C';                           
 }
 
+// ĐÃ SỬA: Toàn bộ huy hiệu trạng thái (Thấp, Bình thường, Cao) được tối ưu cấu trúc Blur-Glassmorphism
 function glucoseBadge(v) {
-  if (v < THRESHOLD_LOW)  return `<span class="status-badge badge-low">🔵 Thấp</span>`;
-  if (v < THRESHOLD_WARN) return `<span class="status-badge badge-normal">✅ Bình thường</span>`;
-  if (v < THRESHOLD_HIGH) return `<span class="status-badge badge-warn">⚠️ Hơi cao</span>`;
-  return `<span class="status-badge badge-danger">🔴 Cao</span>`;
+  if (v < THRESHOLD_LOW)  return `<span class="status-badge badge-low"><span class="w-2 h-2 rounded-full bg-[#6C4DEF] mr-1"></span> Thấp</span>`;
+  if (v < THRESHOLD_WARN) return `<span class="status-badge badge-normal"><span class="w-2 h-2 rounded-full bg-[#1DA462] mr-1"></span> Bình thường</span>`;
+  if (v < THRESHOLD_HIGH) return `<span class="status-badge badge-warn"><span class="w-2 h-2 rounded-full bg-[#E5920A] mr-1"></span> Hơi cao</span>`;
+  return `<span class="status-badge badge-danger"><span class="w-2 h-2 rounded-full bg-[#E54C4C] mr-1"></span> Cao</span>`;
 }
 
 function escHtml(str) {
