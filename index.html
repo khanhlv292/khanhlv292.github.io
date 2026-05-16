@@ -417,7 +417,7 @@ function renderDashboard(rows) {
       <td class="text-slate-400">${(r.timeStr||'').substring(0,5)}</td>
       <td style="font-weight:800; color:${glucoseColor(r.glucoseValue)}; font-size:0.95rem;">${r.glucoseValue.toFixed(1)}</td>
       <td>${glucoseBadge(r.glucoseValue)} ${r.type ? `<br><span class='text-slate-400 font-medium text-[11px] mt-0.5 inline-block'>${escHtml(r.type)}</span>` : ''}</td>
-      <td class="text-slate-600 font-medium" style="max-width:280px; text-overflow:ellipsis;">${r.note ? escHtml(r.note) : '—'}</td>
+      <td class="text-slate-600 font-medium style='max-width:280px; text-overflow:ellipsis;'">${r.note ? escHtml(r.note) : '—'}</td>
     `;
     tbody.appendChild(tr);
   });
