@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Glow & Health – Nhật Ký Đường Huyết ✨</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -26,455 +26,72 @@
       --shadow-md:   0 6px 28px rgba(15,133,255,0.13);
       --radius:      16px;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
       font-family: 'Aptos Display', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
       background: var(--bg-cream);
       color: var(--charcoal);
       min-height: 100vh;
-    }
-    .header-wrap {
-      background: linear-gradient(135deg, #0F85FF 0%, #38b6ff 55%, #78C1FF 100%);
-      padding: 28px 36px 24px;
-      position: relative;
-      overflow: hidden;
-    }
-    .header-title {
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: -0.5px;
-    }
-    .header-quote {
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.85);
-      font-style: italic;
-      margin-top: 6px;
-    }
-    .header-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(255,255,255,0.18);
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 999px;
-      padding: 4px 14px;
-      font-size: 0.78rem;
-      color: #fff;
+      overflow-x: hidden; /* Prevent horizontal scroll on body */
     }
     .card {
       background: var(--white);
       border-radius: var(--radius);
       box-shadow: var(--shadow-sm);
-      padding: 20px 22px;
+      padding: 16px; /* Reduced mobile padding */
       transition: box-shadow 0.2s;
     }
+    @media (min-width: 640px) { .card { padding: 22px; } }
     .card:hover { box-shadow: var(--shadow-md); }
-    .card-title {
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--blue-tech);
-      margin-bottom: 12px;
+    
+    /* Optimized KPI Values for mobile */
+    .kpi-value { font-size: 1.75rem; font-weight: 800; color: var(--blue-tech); line-height: 1.1; margin: 4px 0 2px; }
+    @media (min-width: 640px) { .kpi-value { font-size: 2.25rem; } }
+
+    /* Chart Container Mobile Opitmization */
+    .chart-container { position: relative; height: 300px; } /* taller on mobile */
+    @media (min-width: 768px) { .chart-container { height: 270px; } }
+
+    /* CRITICAL MOBILE TABLE FIX */
+    .table-scroll-container {
+      width: 100%;
+      overflow-x: auto; /* Enable horizontal scroll */
+      -webkit-overflow-scrolling: touch;
+      border-radius: 8px;
+      margin-top: 10px;
     }
-    .kpi-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 18px 20px;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
+    .history-table {
+      width: 100%;
+      min-width: 600px; /* Force minimum width to prevent squishing on mobile */
+      border-collapse: collapse;
+      font-size: 0.83rem;
     }
-    .kpi-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-    .kpi-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--blue-tech), var(--blue-pastel));
+    .history-table td { padding: 12px 10px; vertical-align: top; }
+
+    /* Rest of style is unchanged */
+    .history-table thead th {
+      background: linear-gradient(135deg, #EEF6FF, #E6F8FC);
+      color: var(--blue-tech); font-weight: 700; font-size: 0.73rem;
+      text-transform: uppercase; padding: 12px 10px; text-align: left; border-bottom: 2px solid #D8EFFE;
     }
-    .kpi-label { font-size: 0.75rem; font-weight: 600; color: #9DB0BF; text-transform: uppercase; }
-    .kpi-value { font-size: 2rem; font-weight: 800; color: var(--blue-tech); line-height: 1.1; margin: 6px 0 2px; }
-    .kpi-sub { font-size: 0.78rem; color: #9DB0BF; }
-    .glucose-badge { display: inline-block; padding: 3px 12px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+    .history-table tbody tr { border-bottom: 1px solid #EDF3F8; transition: background 0.15s; }
+    .history-table tbody tr:hover { background: #F4FAFF; }
+    
+    .glucose-badge { display: inline-block; padding: 3px 12px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
     .badge-normal  { background: #E8FBF4; color: #1DA462; }
     .badge-warn    { background: #FFF4E0; color: #E5920A; }
     .badge-danger  { background: #FFE9EA; color: #E54C4C; }
     .badge-low     { background: #EDE9FF; color: #6C4DEF; }
-    .chart-wrap { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 20px 22px; }
-    .chart-container { position: relative; height: 270px; }
-    .history-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
-    .history-table thead th {
-      background: linear-gradient(135deg, #EEF6FF, #E6F8FC);
-      color: var(--blue-tech); font-weight: 700; font-size: 0.73rem;
-      text-transform: uppercase; padding: 10px 12px; text-align: left; border-bottom: 2px solid #D8EFFE;
-    }
-    .history-table tbody tr { border-bottom: 1px solid #EDF3F8; transition: background 0.15s; }
-    .history-table tbody tr:hover { background: #F4FAFF; }
-    .history-table td { padding: 9px 12px; vertical-align: top; }
-    .tip-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px dashed #E4EEF8; }
-    .tip-text { font-size: 0.82rem; line-height: 1.5; color: var(--charcoal); }
-    .latest-value { font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, var(--blue-tech), #38b6ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    
+    .latest-value { font-size: 2.75rem; font-weight: 800; background: linear-gradient(135deg, var(--blue-tech), #38b6ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    @media (min-width: 640px) { .latest-value { font-size: 3.5rem; } }
     .latest-note-box { background: linear-gradient(135deg, #F0F9FF, #E8FEF7); border-left: 3px solid var(--blue-pastel); padding: 10px 14px; margin-top: 12px; font-size: 0.82rem; }
-    .loading-spinner { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 40px; }
-    .spinner { width: 40px; height: 40px; border: 3px solid #D8EFFE; border-top-color: var(--blue-tech); border-radius: 50%; animation: spin 0.8s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .fade-up { animation: fadeUp 0.45s ease both; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-    .main-grid { display: grid; grid-template-columns: 300px 1fr; gap: 20px; }
-    @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
-    .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    @media (max-width: 640px) { .kpi-grid { grid-template-columns: 1fr 1fr; } }
   </style>
 </head>
 <body>
 
-<div class="header-wrap">
-  <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+<div class="bg-[#0F85FF] p-4 sm:p-6 md:p-8">
+  <div style="max-width:1200px;margin:0 auto;" class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
     <div>
-      <div class="header-title">Glow &amp; Health: Nhật Ký Đường Huyết ✨</div>
-      <div class="header-quote" id="dailyQuote">Đang tải câu khích lệ...</div>
-    </div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;">
-      <span class="header-badge">💊 Theo dõi sức khoẻ</span>
-      <button onclick="loadData()" class="header-badge bg-white/20 hover:bg-white/40 cursor-pointer transition-all" id="lastUpdated">🔄 Tải dữ liệu</button>
-    </div>
-  </div>
-</div>
-
-<div style="max-width:1200px;margin:0 auto;padding:24px 16px 40px;">
-  <div id="loadingState" class="loading-spinner">
-    <div class="spinner"></div>
-    <span style="color:#9DB0BF;font-size:0.85rem;">Đang kết nối dữ liệu động...</span>
-  </div>
-
-  <div id="errorState" style="display:none;" class="card text-center py-10">
-    <div style="font-size:2rem;margin-bottom:12px;">⚠️</div>
-    <div style="font-size:1.1rem;font-weight:700;color:#E54C4C;margin-bottom:8px;">Hệ Thống Phân Tích Dữ Liệu</div>
-    <p class="text-sm text-gray-500 mb-2">Ứng dụng đã nhận được phản hồi từ kết nối nhưng cấu trúc không khớp với bảng dữ liệu CSV.</p>
-    <div id="errorMsg" class="bg-gray-50 p-4 rounded-lg text-left text-sm font-mono text-gray-600 max-w-2xl mx-auto border border-gray-200 whitespace-pre-line my-4 overflow-x-auto"></div>
-    <div class="text-xs text-gray-400 mt-4">Mẹo: Nếu nội dung trên là mã lỗi mạng, hãy đưa file lên GitHub Pages như hướng dẫn trước để khắc phục hoàn toàn.</div>
-  </div>
-
-  <div id="dashboard" style="display:none;">
-    <div class="main-grid">
-      <div style="display:flex;flex-direction:column;gap:16px;">
-        <div class="card fade-up">
-          <div class="card-title">💡 Lời khuyên hôm nay</div>
-          <div id="tipsList">
-            <div class="tip-item"><div class="tip-text">🥗 <strong>Ăn nhiều rau xanh:</strong> Chất xơ giúp ổn định đường huyết, da sáng mịn hơn.</div></div>
-            <div class="tip-item"><div class="tip-text">🚶‍♀️ <strong>Đi bộ 15 phút:</strong> Giúp hấp thụ glucose tốt sau ăn, tránh tăng đột biến.</div></div>
-            <div class="tip-item"><div class="tip-text">💧 <strong>Uống đủ nước:</strong> Giúp thận đào thải tốt glucose dư thừa.</div></div>
-          </div>
-        </div>
-
-        <div class="card fade-up" id="latestCard">
-          <div class="card-title">🩸 Lần đo mới nhất</div>
-          <div style="text-align:center;padding:8px 0;">
-            <div class="latest-value" id="latestGlucose">--</div>
-            <div class="latest-unit">mmol/L</div>
-            <div style="margin-top:8px;" id="latestBadge"></div>
-            <div style="margin-top:6px;font-size:0.78rem;color:#9DB0BF;" id="latestDateTime"></div>
-            <div style="margin-top:4px;font-size:0.78rem;color:#9DB0BF;" id="latestType"></div>
-          </div>
-          <div class="latest-note-box" id="latestNote">📝 Ghi chú...</div>
-        </div>
-      </div>
-
-      <div style="display:flex;flex-direction:column;gap:16px;">
-        <div class="kpi-grid fade-up">
-          <div class="kpi-card">
-            <div class="kpi-label">Đường Huyết Trung Bình</div>
-            <div class="kpi-value" id="kpiAvg">--</div>
-            <div class="kpi-sub">mmol/L</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Lần đo gần nhất</div>
-            <div class="kpi-value" id="kpiLast" style="font-size:1.35rem;">--</div>
-            <div class="kpi-sub" id="kpiLastDate">--</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Tổng số lần đo</div>
-            <div class="kpi-value" id="kpiTotal">--</div>
-            <div class="kpi-sub">bản ghi</div>
-          </div>
-        </div>
-
-        <div class="chart-wrap fade-up">
-          <div class="flex justify-between items-center mb-4">
-            <div>
-              <div class="card-title" style="margin-bottom:2px;">📈 Xu Hướng Đường Huyết</div>
-            </div>
-          </div>
-          <div class="chart-container">
-            <canvas id="glucoseChart"></canvas>
-          </div>
-        </div>
-
-        <div class="card fade-up">
-          <div class="card-title" style="margin-bottom:14px;">🗓️ 5 Lần Đo Gần Nhất</div>
-          <div style="overflow-x:auto;">
-            <table class="history-table">
-              <thead>
-                <tr>
-                  <th>Ngày</th>
-                  <th>Giờ</th>
-                  <th>Đường Huyết</th>
-                  <th>Trạng thái</th>
-                  <th>Ghi chú 📝</th>
-                </tr>
-              </thead>
-              <tbody id="historyBody"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTDHbh0EEq8x1x87poyvwlKE9wvVrYnFhojGAAS17HVQqF2yvFCU6NMuZOOsg1DjTg4Eocq47Q3Yrie/pub?gid=0&single=true&output=csv";
-
-const THRESHOLD_HIGH  = 7.8;   
-const THRESHOLD_WARN  = 6.1;   
-const THRESHOLD_LOW   = 3.9;   
-
-const quotes = [
-  "\"Mỗi lần đo là một bước nhỏ trên con đường glow-up sức khỏe của bạn.\" ✨",
-  "\"Đường huyết ổn định = da đẹp + năng lượng dồi dào + tâm trạng vui vẻ.\" 💪",
-  "\"Mỗi bữa ăn lành mạnh là một lá thư tình bạn gửi cho tương lai của mình.\" 💌"
-];
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('dailyQuote').textContent = quotes[Math.floor(Math.random() * quotes.length)];
-  loadData();
-});
-
-async function loadData() {
-  document.getElementById('loadingState').style.display = 'flex';
-  document.getElementById('dashboard').style.display = 'none';
-  document.getElementById('errorState').style.display = 'none';
-
-  let logs = [];
-
-  // 1. THỬ NGHIỆM FETCH TRỰC TIẾP
-  try {
-    const res = await fetch(SHEET_CSV_URL);
-    if (res.ok) { 
-      const text = await res.text(); 
-      if (text.trim().length > 100 && !text.includes('<!DOCTYPE html')) {
-        parseCsvText(text); 
-        return; 
-      }
-      logs.push(`Direct Fetch: Nhận về chuỗi quá ngắn hoặc định dạng HTML không phải CSV.`);
-    } else { logs.push(`Direct Fetch: Lỗi HTTP ${res.status}`); }
-  } catch(e) { logs.push(`Direct Fetch: Bị chặn CORS (${e.message})`); }
-
-  // 2. THỬ NGHIỆM QUA PROXY CORSPROXY.IO
-  try {
-    const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(SHEET_CSV_URL)}`);
-    if (res.ok) { 
-      const text = await res.text(); 
-      if (text.trim().length > 100 && !text.includes('<!DOCTYPE html')) {
-        parseCsvText(text); 
-        return; 
-      }
-      logs.push(`CorsProxy: Nhận được thông báo hệ thống thay vì dữ liệu CSV.`);
-    } else { logs.push(`CorsProxy: Lỗi HTTP ${res.status}`); }
-  } catch(e) { logs.push(`CorsProxy: Thất bại (${e.message})`); }
-
-  // 3. THỬ NGHIỆM QUA PROXY ALLORIGINS
-  try {
-    const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(SHEET_CSV_URL)}`);
-    if (res.ok) { 
-      const json = await res.json(); 
-      if(json.contents && json.contents.trim().length > 100 && !json.contents.includes('<!DOCTYPE html')) { 
-        parseCsvText(json.contents); 
-        return; 
-      }
-      logs.push(`AllOrigins: Nội dung trả về không đúng cấu trúc bảng.`);
-    } else { logs.push(`AllOrigins: Lỗi kết nối`); }
-  } catch(e) { logs.push(`AllOrigins: Thất bại (${e.message})`); }
-
-  // NẾU TẤT CẢ THẤT BẠI: Hiển thị nhật ký log để chẩn đoán trực quan
-  showError(`Ứng dụng không nhận được dữ liệu CSV chuẩn từ các nguồn kết nối công khai.\n\n[Nhật ký hệ thống]:\n${logs.join('\n')}\n\n*Gợi ý: Hãy tiến hành đưa file index.html này lên GitHub Pages như hướng dẫn ở bước trước. Khi chạy trên môi trường internet thật (https://), trình duyệt sẽ kích hoạt chế độ tải trực tiếp an toàn từ Google Sheet mà không cần đi qua proxy trung gian nữa!`);
-}
-
-function parseCsvText(csvText) {
-  try {
-    // Để trống cấu trúc delimiter để PapaParse tự động quét nhận diện thông minh (, hoặc ;)
-    const result = Papa.parse(csvText.trim(), {
-      header: true,
-      skipEmptyLines: true
-    });
-
-    if (!result.data || result.data.length === 0) {
-      showError(`[Lỗi PapaParse]: Không thể phân tích cấu trúc cột.\n\nNội dung thô nhận được từ Server (200 ký tự đầu):\n"${csvText.substring(0, 200)}..."`);
-      return;
-    }
-    processAndRender(result.data);
-  } catch (err) {
-    showError(`Lỗi phân tích cú pháp CSV: ${err.message}`);
-  }
-}
-
-function processAndRender(rawData) {
-  const rows = [];
-  try {
-    rawData.forEach(row => {
-      const keys = Object.keys(row);
-      const getVal = (keyword) => {
-        const k = keys.find(k => k.toLowerCase().replace(/\s/g,'').includes(keyword.toLowerCase()));
-        return k ? (row[k] || '').trim() : '';
-      };
-
-      const dateStr    = getVal('date');
-      const timeStr    = getVal('time');
-      const glucoseRaw = getVal('glucose');
-      const dateTime   = getVal('datetime');
-      const type       = getVal('type');
-      const note       = getVal('note');
-
-      if (!glucoseRaw) return;
-
-      const glucoseStr   = glucoseRaw.replace(',', '.');
-      const glucoseValue = parseFloat(glucoseStr);
-
-      if (isNaN(glucoseValue)) return;
-
-      rows.push({ dateStr, timeStr, glucoseValue, dateTime, type, note });
-    });
-
-    if (rows.length === 0) {
-      showError("Đã nhận dạng cấu trúc bảng nhưng các hàng dữ liệu không chứa chỉ số Glucose hợp lệ.");
-      return;
-    }
-
-    renderDashboard(rows);
-  } catch(err) {
-    showError(`Lỗi xử lý dữ liệu biểu đồ: ${err.message}`);
-  }
-}
-
-function renderDashboard(rows) {
-  const chartRows = rows.slice(-30);
-  const total = rows.length;
-  const avg   = rows.reduce((s, r) => s + r.glucoseValue, 0) / total;
-  const last  = rows[rows.length - 1];
-
-  document.getElementById('kpiTotal').textContent = total;
-  document.getElementById('kpiAvg').textContent   = avg.toFixed(1);
-  document.getElementById('kpiLast').textContent  = last.glucoseValue.toFixed(1) + ' mmol/L';
-  document.getElementById('kpiLastDate').textContent = last.dateStr + ' ' + (last.timeStr || '').substring(0,5);
-
-  const now = new Date();
-  document.getElementById('lastUpdated').textContent = `🔄 Cập nhật: ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
-
-  document.getElementById('latestGlucose').textContent = last.glucoseValue.toFixed(1);
-  document.getElementById('latestDateTime').textContent = `📅 ${last.dateStr || '--'} ⏰ ${(last.timeStr||'').substring(0,5)}`;
-  document.getElementById('latestType').textContent = last.type ? `🏷️ ${last.type}` : '';
-  document.getElementById('latestBadge').innerHTML = glucoseBadge(last.glucoseValue);
-  document.getElementById('latestNote').innerHTML = last.note ? `📝 ${escHtml(last.note)}` : '<i>Không có ghi chú.</i>';
-
-  renderChart(chartRows);
-
-  const recent = rows.slice(-5).reverse();
-  const tbody  = document.getElementById('historyBody');
-  tbody.innerHTML = '';
-  recent.forEach(r => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>${escHtml(r.dateStr)}</td>
-      <td>${(r.timeStr||'').substring(0,5)}</td>
-      <td style="font-weight:700; color:${glucoseColor(r.glucoseValue)};">${r.glucoseValue.toFixed(1)}</td>
-      <td>${glucoseBadge(r.glucoseValue)} ${r.type ? `<br><span class='text-gray-400 text-xs'>${escHtml(r.type)}</span>` : ''}</td>
-      <td style="max-width:250px;">${r.note ? escHtml(r.note) : '—'}</td>
-    `;
-    tbody.appendChild(tr);
-  });
-
-  document.getElementById('loadingState').style.display = 'none';
-  document.getElementById('dashboard').style.display    = 'block';
-}
-
-let glucoseChartInstance = null;
-function renderChart(rows) {
-  const labels = rows.map(r => r.dateStr);
-  const values = rows.map(r => r.glucoseValue);
-  const ctx = document.getElementById('glucoseChart').getContext('2d');
-  
-  if (glucoseChartInstance) glucoseChartInstance.destroy();
-
-  const gradient = ctx.createLinearGradient(0, 0, 0, 270);
-  gradient.addColorStop(0, 'rgba(15,133,255,0.18)');
-  gradient.addColorStop(1, 'rgba(15,133,255,0)');
-
-  glucoseChartInstance = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [{
-        data: values,
-        fill: true,
-        backgroundColor: gradient,
-        borderColor: '#0F85FF',
-        borderWidth: 2.5,
-        pointBackgroundColor: values.map(v => glucoseColor(v)),
-        pointBorderColor: '#fff',
-        pointRadius: 5,
-        tension: 0.4
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        y: { suggestedMin: 3.0, suggestedMax: 10.0 }
-      }
-    },
-    plugins: [{
-      id: 'refLine',
-      afterDraw(chart) {
-        const { ctx, chartArea, scales } = chart;
-        if (!chartArea) return;
-        const yPos = scales.y.getPixelForValue(THRESHOLD_HIGH);
-        ctx.save();
-        ctx.setLineDash([6, 4]);
-        ctx.strokeStyle = '#E54C4C';
-        ctx.beginPath(); ctx.moveTo(chartArea.left, yPos); ctx.lineTo(chartArea.right, yPos); ctx.stroke();
-        ctx.fillStyle = '#E54C4C'; ctx.font = '11px sans-serif';
-        ctx.fillText(`Ngưỡng cao: ${THRESHOLD_HIGH}`, chartArea.right - 90, yPos - 5);
-        ctx.restore();
-      }
-    }]
-  });
-}
-
-function glucoseColor(v) {
-  if (v < THRESHOLD_LOW)  return '#6C4DEF';  
-  if (v < THRESHOLD_WARN) return '#1DA462';  
-  if (v < THRESHOLD_HIGH) return '#E5920A';  
-  return '#E54C4C';                           
-}
-
-function glucoseBadge(v) {
-  if (v < THRESHOLD_LOW)  return `<span class="glucose-badge badge-low">🔵 Thấp</span>`;
-  if (v < THRESHOLD_WARN) return `<span class="glucose-badge badge-normal">✅ Bình thường</span>`;
-  if (v < THRESHOLD_HIGH) return `<span class="glucose-badge badge-warn">⚠️ Hơi cao</span>`;
-  return `<span class="glucose-badge badge-danger">🔴 Cao</span>`;
-}
-
-function escHtml(str) {
-  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-function showError(msg) {
-  document.getElementById('loadingState').style.display = 'none';
-  document.getElementById('errorState').style.display   = 'block';
-  document.getElementById('errorMsg').textContent = msg;
-}
-</script>
-</body>
-</html>
+      <div class="text-white text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight">Glow &amp; Health: Nhật Ký Đường Huyết ✨</div>
+      <div class="text-white/80 text-sm italic mt-1" id="dailyQuote">Đang tải câu khích lệ...
